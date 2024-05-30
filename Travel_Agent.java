@@ -9,7 +9,9 @@ class Travel_Agent{
     private String url;
     private String phone;
     public Travel_Agent(String username, String password, String email, String name, String surname,
-                        String travel_agency, String address, String url, String phone) {
+                        String travel_agency, String address, String url, String phone) 
+						
+						{
         this.username = username;
         this.password = password;
         this.email = email;
@@ -19,6 +21,8 @@ class Travel_Agent{
         this.address = address;
         this.url = url;
         this.phone = phone;
+		
+						}
 
 
         public void setUsername(String username) {
@@ -87,5 +91,91 @@ class Travel_Agent{
         public String getPhone() {
             return phone;
         }
+		
+		
+		public ArrayList<Reservation> get_confirmed_reservations()
+		
+		
+		{
+			
+			ArrayList<Reservation> result = new ArrayList<Reservation>();
+			
+			
+			for(Reservation r: Main.reservations)
+				
+				{
+					if(r.getUsernameSubmitted().equals(this.username) && r.getStatus().equals("confirmed"))
+						
+						{
+							
+						   result.add(r);	
+							
+						}
+						
+					
+				}
+			
+			
+			return result;
+			
+		}
+		
+		
+		public String get_reservationdetails(Reservation selected)
+		
+		{
+			
+			String data = "";
+			
+			
+			ArrayList<Reservation> result = get_confirmed_reservations();
+			
+			
+			for (Reservation r: result)
+				
+				{
+					if (r.getId()== selected.get_id())
+						
+						{
+							data = r.get_info();
+							
+						}
+					
+					
+				}
+			
+			
+			return data;
+			
+		}
+		
+		
+		public void accept_pending_payment(Reservation selected)
+		
+		
+		{
+			
+			Main.find_pending_payment(selected);
+			
+			
+		}
+		
+		public void cancel_resevation (Resevation selected)
+		
+		{
+			Main.find_reservation(selected);
+			
+		}
+		
+		public void accepts_additional_supply(Reservation selected)
+		
+		
+		{
+			Main.find_reservation(selected);
+			
+			
+		}
+		
+		
+		
     }
-}

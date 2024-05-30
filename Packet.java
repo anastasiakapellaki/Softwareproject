@@ -4,12 +4,14 @@ class Packet{
     private int duration;
     private date departure_date;
     private date arrival_date;
-    private int cost;
+    private double cost;
     private String description;
     private String program;
     private String username_agent;
+	private ArrayList<String> photos;
+	
     public Packet(int id, String destination, int duration, java.util.Date departureDate, java.util.Date arrivalDate,
-                  int cost, String description, String program, String usernameAgent) {
+                  double cost, String description, String program, String usernameAgent) {
         this.id = id;
         this.destination = destination;
         this.duration = duration;
@@ -40,7 +42,7 @@ class Packet{
         this.arrivalDate = arrivalDate;
     }
 
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
@@ -77,7 +79,7 @@ class Packet{
         return arrivalDate;
     }
 
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 
@@ -92,7 +94,15 @@ class Packet{
     public String getUsernameAgent() {
         return usernameAgent;
     }
-
-
-
+	
+	
+	public void setPhotos(ArrayList<String> paths)
+	
+	{
+		photos = paths;
+		
+		
+	}
+	
+	
 }

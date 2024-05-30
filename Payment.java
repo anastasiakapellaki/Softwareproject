@@ -6,13 +6,19 @@ class Payment{
     private Date date;
     private Time time;
     private String customer_username;
-    public Payment(int id, int amount, String bank_account, Date date, Time time, String customer_username) {
+	private int reservation_id;
+	
+	private String status;
+	
+    public Payment(int id, int amount, String bank_account, Date date, Time time, String customer_username, int reservation_id) {
         this.id = id;
         this.amount = amount;
         this.bank_account = bank_account;
         this.date = date;
         this.time = time;
         this.customer_username = customer_username;
+		
+		this.reservation_id = reservation_id;
     }
     public void setId(int id) {
         this.id = id;
@@ -60,4 +66,26 @@ class Payment{
     public String getCustomerUsername() {
         return customer_username;
     }
+	
+	public int getReservationId()
+	
+	{
+		return reservation_id;
+		
+	}
+	
+	public String get_status()
+	
+	{
+		return status;
+		
+	}
+	
+	public void set_status(Sring status)
+	
+	{
+		this.status = status;
+		
+	}
+	
 }
