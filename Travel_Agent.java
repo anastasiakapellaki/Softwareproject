@@ -98,25 +98,8 @@ class Travel_Agent{
 		
 		{
 			
-			ArrayList<Reservation> result = new ArrayList<Reservation>();
 			
 			
-			for(Reservation r: Main.reservations)
-				
-				{
-					if(r.getUsernameSubmitted().equals(this.username) && r.getStatus().equals("confirmed"))
-						
-						{
-							
-						   result.add(r);	
-							
-						}
-						
-					
-				}
-			
-			
-			return result;
 			
 		}
 		
@@ -125,27 +108,7 @@ class Travel_Agent{
 		
 		{
 			
-			String data = "";
 			
-			
-			ArrayList<Reservation> result = get_confirmed_reservations();
-			
-			
-			for (Reservation r: result)
-				
-				{
-					if (r.getId()== selected.get_id())
-						
-						{
-							data = r.get_info();
-							
-						}
-					
-					
-				}
-			
-			
-			return data;
 			
 		}
 		
@@ -155,7 +118,6 @@ class Travel_Agent{
 		
 		{
 			
-			Main.find_pending_payment(selected);
 			
 			
 		}
@@ -163,7 +125,7 @@ class Travel_Agent{
 		public void cancel_resevation (Resevation selected)
 		
 		{
-			Main.find_reservation(selected);
+			
 			
 		}
 		
@@ -171,7 +133,7 @@ class Travel_Agent{
 		
 		
 		{
-			Main.find_reservation(selected);
+			
 			
 			
 		}

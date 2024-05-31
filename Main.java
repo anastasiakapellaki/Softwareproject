@@ -381,57 +381,8 @@ public void display_no_photos_page()
 	 public boolean check_packet_step1(ArrayList<String> details)
 	 
 	 {
-		 double flag = true;
-		 
-		 String decimalPattern = "([0-9]*)\\.([0-9]*)";  
-
-         DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
-
-		 String price = details.get(0);
-		 
-		 String start_date = details.get(1);
-		 
-		 String end_date detais.get(2);
-		 
-		 String hotel_name = details.get(3);
-		 
-		 String activites = details.get(4);
 		 
 		 
-		 if(price =="" || start_date =="" || end_date=="" || hotel_name=="" || activities=="")
-			 
-			 {
-				 flag = false;
-				 
-			 }
-			 
-		if(Pattern.matches(decimalPattern, price) ==false)
-			
-			{
-				
-				flag = false;
-				
-			}
-			
-			try
-			{
-				df.parse(start_date);
-			}
-				catch(Exception e)
-			{
-               flag = false;
-			}
-			
-			try
-			{
-				df.parse(end_date);
-			}
-				catch(Exception e)
-			{
-               flag = false;
-			}
-		 
-		 return flag;
 		 
 	 }
 	 
@@ -439,28 +390,8 @@ public void display_no_photos_page()
 	 public void  inserts_details_step1(ArrayList<String> details)
 	 
 	 {
-		 if(check_packet_step1(details)==true)
-			 
 		 
-		 {
-			 
-			 Packet p1 = new Packet();
-			 
-			 p1.setDepartureDate(details.get(1));
-			 
-			 p1.setArrivalDate(details.get(2));
-			 
-			 p1.setCost(details.get(0));
-			 
-			 p1.setDestination(details.get(3));
-			 
-			 p1.setDescription(details.get(4));
-			 
-			 
-			 Main.packets.add(p1);
-			 
-		 }
-		  
+		 
 		 
 	 }
 	 
@@ -470,64 +401,21 @@ public void display_no_photos_page()
 	 
 	 
 	 {
-		 boolean flag = true;
 		 
 		 
-		 for (String s: details)
-			 
-			 {
-				 
-				 File f = new File(s);
-				 
-				 long size = f.length();
-				 
-				 int dotIndex = s.lastIndexOf('.'); 
-  
-				String extension = (dotIndex > 0) ? s.substring(dotIndex + 1) : ""; 
-				
-				
-				if(size > 1024)
-					
-					{
-						
-						flag = false;
-						
-					}
-					
-					
-				if(extention!='jpg')
-					
-					{
-						flag = false;
-						
-					}
-				
-
-
-				 
-			 }
 		 
-		 return flag;
 	 }
 	 
 	 
-	 public void inserts_details_step2(ArrayList<String> details, Packet p)
+	 public void inserts_details_step2(ArrayList<String> details)
 	 
 	 
 	 {
 		 
-		 if(check_packet_step2(details)==true)
-			 
-			 {
-				 
-				 p.setPhotos(details);
-				 
-				 
-			 }
-		 
 		 
 		 
 	 }
+	 
 	 
 	 
 	 public Payment find_pending_payment(Reservation selected)
@@ -535,52 +423,15 @@ public void display_no_photos_page()
 		{
 		
 		
-			Payment result = null;
-			
-			
-			for( Payment p: payments)
-				
-				{
-					if(p.getReservationId() == select.getId() && p.get_status().equals("pending"))
-						
-						{
-							
-							result = p;
-							
-							break;
-							
-							
-						}
-					
-					
-				}
 		
-		  return result;
 		
 		}
 		
 		
-	public void update_remaining_amount(Reservation selected)
+	public void update_remaining_amount(Reservation selected, int amount)
 	
 	
 	{
-		
-		Payment result = find_pending_payment(selected);
-		
-		
-		for(Reservation r: Main.reservations)
-			
-			{
-				if(r.getId()==selected.getId())
-					
-					{
-						
-						r.set_remain_cost(r.get_remain_cost() - p.getAmount());
-						
-					}
-				
-				
-			}
 		
 		
 	}
@@ -589,62 +440,20 @@ public void display_no_photos_page()
 	public void update_payment(Payment p)
 	
 	{
-		p.set_status("completed");
+		
 		
 	}
 
     public boolean check_remaining_amount(Resevation selected)
 	
 	{
-		boolean flag = false;
 		
 		
-		for(Reservation r: Main.reservations)
-			
-			{
-				if(r.getId() == selected.getId())
-					
-					{
-						if(r.get_remain_amount()==0)
-							
-							{
-								
-								flag = true;
-								
-							}
-						
-						
-						
-					}
-				
-				
-			}
-		
-		return flag;
 	}
 
     public void update_reservation_status(Reservation selected)
 	
 	{
-		
-		for (Reservation r: Main.reservations)
-			
-			{
-				
-				if(r.getId() == selected.getId())
-					
-				
-				{
-					r.setStatus("totally paid");
-					
-					
-					
-				}
-				
-				
-				
-			}
-		
 		
 		
 	}
@@ -654,28 +463,7 @@ public void display_no_photos_page()
 		
 		{
 			
-			Reservation result = null;
 			
-			
-			for(Reservation r: Main.reservations)
-				
-				{
-					if(r.getId() == selected.getId())
-						
-						{
-							
-							
-							result = r;
-							
-							break;
-							
-						}
-					
-					
-					
-				}
-			
-			return result;
 		}
 		
 		
@@ -683,52 +471,23 @@ public void display_no_photos_page()
 	
 	{
 		
-		Reservation result = find_reservation(selected);
 		
-		Main.reservations.remove(result);
 		
 		
 	}
 	
-	public void update_additional_supplyy(Reservation selected, Additional_supply a)
+	public void update_additional_supplyy(Reservation selected)
 	
 	{
 		
-		for(Reservation r: Main.reservations)
-			
-			{
-				
-				if (r.getId() == selected.get_id())
-					
-					{
-						
-						r.add_supply(a);
-						
-						
-					}
-				
-			}
 		
 	}
 
-    public void update_remaining_amount(Reservation selected, Additional_supply a)
+    public void update_remaining_amount(Reservation selected, int amount)
 	
 	
 	{
-		for(Reservation r: Main.reservations)
-			
-			{
-				
-				if (r.getId() == selected.get_id())
-					
-					{
-						
-						r.set_remain_cost(r.get_remain_cost() + a.get_amount());
-						
-						
-					}
-				
-			}
+		
 		
 		
 	}

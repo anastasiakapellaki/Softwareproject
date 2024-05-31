@@ -1,45 +1,24 @@
 class Reservation{
 
     private int id;
-	
     private int packet_id;
-	
     private int total_cost;
-	
-    private int remain_cost;
-	
+    private int paid_cost;
     private Arraylist<Customer>customers=new Arraylist();
-	
     private Date date;
-	
     private Time time;
-	
     private String username_submitted;
-	
-	private String status;
-	
-	private ArrayList<Additional_supply> supplies;
-	
-    public Reservation(int id, int packetId, int totalCost, int remain_cost, ArrayList<Customer> customers,
+    public Reservation(int id, int packetId, int totalCost, int paidCost, ArrayList<Customer> customers,
                        java.util.Date date, java.util.Time time, String usernameSubmitted) {
         this.id = id;
         this.packetId = packetId;
         this.totalCost = totalCost;
-        this.remain_cost = remain_cost;
+        this.paidCost = paidCost;
         this.customers = customers;
         this.date = date;
         this.time = time;
         this.usernameSubmitted = usernameSubmitted;
     }
-
-
-    public String get_info()
-	
-	{
-		
-		return id + " " + packetId + " " + totalCost + " " + customers + " " + date + " " time + " " + usernameSubmitted;
-		
-	}
 
 
     public void setId(int id) {
@@ -54,8 +33,8 @@ class Reservation{
         this.totalCost = totalCost;
     }
 
-    public void set_remain_cost(int remain_cost) {
-        this.remain_cost = remain_cost;
+    public void setPaidCost(int paidCost) {
+        this.paidCost = paidCost;
     }
 
     public void setCustomers(ArrayList<Customer> customers) {
@@ -88,8 +67,8 @@ class Reservation{
         return totalCost;
     }
 
-    public int get_remain_cost(() {
-        return remain_cost;
+    public int getPaidCost() {
+        return paidCost;
     }
 
     public ArrayList<Customer> getCustomers() {
@@ -107,30 +86,6 @@ class Reservation{
     public String getUsernameSubmitted() {
         return usernameSubmitted;
     }
-	
-	public String getStatus()
-	
-	{
-		
-		return status;
-		
-	}
-	
-	public void setStatus(String status)
-	
-	{
-		
-		this.status = status;
-		
-		
-	}
-	
-	public void add_supply(Additional_supply a)
-	
-	{
-		supplies.add(a);
-		
-	}
 	
 
 
