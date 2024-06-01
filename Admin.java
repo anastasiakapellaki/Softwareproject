@@ -19,5 +19,12 @@ class Admin{
     public String getusername(){
         return username;
     }
+	
+	public void accept_request(Registration_Request r)
+	
+	{
+		Main.update_status(r);
+		
+	}
 
 }

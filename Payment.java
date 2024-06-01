@@ -43,6 +43,19 @@ class Payment{
     public void setCustomerUsername(String customer_username) {
         this.customer_username = customer_username;
     }
+	
+	
+	public void set_reservation_id(int res_id)
+	
+	{
+	   
+	   this.reservation_id = res_id;
+
+		
+		
+	}
+	
+	
     public int getId() {
         return id;
     }

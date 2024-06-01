@@ -732,6 +732,370 @@ public void display_no_photos_page()
 		
 		
 	}
+	
+	public boolean check_reservation_step1(ArrayList<String> details>)
+	
+	{
+		boolean flag = true;
+		
+		
+		String onomateponimo = details.get(0);
+		
+		String email = details.get(1);
+		
+		String phone = details.get(2);
+		
+		String at = details.get(3);
+		
+		if(EmailValidator.getInstance().isValid(email)==false)
+			
+			{
+				
+				flag = false;
+				
+				
+			}
+		if(phone.length()!=10)
+			
+			{
+				
+				flag = false;
+				
+			}
+		
+		return flag;
+		
+	}
+	
+	public void insert_reservation_step1 (ArrayList<String> details)
+	
+	{
+		if(check_reservation_step1(details)==true)
+			
+			{
+				
+				Reservation r1 = new Reservation(details);
+				
+				
+				Main.reservations.add(r1);
+				
+				
+				
+			}
+		
+		
+		
+	}
+	
+	public boolean check_file_size(String s)
+	
+	{
+		
+		boolean flag = true;
+		
+		
+		
+		File f = new File(s);
+				 
+		long size = f.length();
+		
+		if (size > 1000000)
+			
+		
+		{
+			
+			flag = false;
+			
+			
+		}
+		
+		return flag;
+		
+	}
+	
+	public void update_reservation_step2 (Reservation r, ArrayList<String> details)
+	
+	{
+		
+		
+		if (check_file_size(details.get(0)==true))
+			
+			{
+				
+				for (Reservation res : Main.reservations)
+					
+					{
+						
+						if(r.getId()==res.getId())
+							
+							{
+								
+								res.set_path_files(details.get(0);
+								
+								
+							}
+						
+						
+						
+					}
+				
+				
+				
+				
+			}
+		
+		
+		
+	}
+	
+	public int calculate_amount(ArrayList<String> details ,Reservation r)
+	
+	{
+		
+		int num_persons = parseInt(details.get(0));
+		
+		int price_per_person = parseInt(details.get(1));
+		
+		int total_price = num_persons * price_per_person;
+		
+		for (Reservation res: Main.reservations)
+			
+			{
+				if(res.getId()==r.getId())
+					
+					{
+						
+						res.setTotalCost(total_price);
+						
+						
+					}
+				
+				
+				
+			}
+		
+		
+	}
+	
+	 public boolean check_amount(Reservatiom r, int amount)
+	 
+	 {
+		 
+		 if(amount>=50)
+			 
+			 {
+				 
+				 return true;
+				 
+			 }
+		 
+		 else 
+			 
+			 {
+				 return false;
+				 
+			 }
+		 
+	 }
+	 
+	 
+	 public boolean check_if_balance_ok(Customer cust, int amount)
+	 
+	 {
+		 
+		 boolean flag;
+		 
+		 
+		 for (Customer c: customers)
+			 
+			 {
+				 if(c.get_username().equals(cust.get_username()))
+					 
+					 {
+						 
+						 if(c.get_balance_of_customer() >= amount)
+							 
+							 {
+								 
+								 flag = true;
+								 
+							 }
+							 
+							
+							else
+								
+								{
+									flag = false;
+									
+								}
+						 
+						 
+					 }
+				 
+				 
+			 }
+		 	 
+		 return flag;
+			 
+		 
+	 }
+
+     public void update_balance_of_user(Customer cust, int amount)
+	 
+	 {
+		 for (Customer c: customers)
+			 
+			 {
+				 if(c.get_username().equals(cust.get_username()))
+					 
+					 {
+						 
+						 if(check_if_balance_ok(c,amount)==true)
+							 
+							 {
+								 
+								 c.set_balance(c.get_balance_of_customer()  - amount);
+								 
+							 }
+							 
+						 
+						 
+					 }
+				 
+				 
+			 }
+		 
+		 
+	 }
+	 
+	 public void create_new_payment(Reservation r, int amount)
+	 
+	 {
+		 Payment p = new Payment();
+		 
+		 p.set_amount(amount);
+		 
+		 p.set_reservation_id(r.getId());
+		 
+		 
+		 
+	 }
+	 
+	 public ArrayList<Registration_Request> get_registration_requests()
+	 
+	 {
+		 
+		 return Main.reg_requests;
+		 
+	 }
+	 
+	public ArrayList<Registration_Request> search_requests (ArrayList<String> filters>)
+	
+	{
+		ArrayList<Registration_Request> result = new ArrayList<Registration_Request>();
+		
+		for (Registration_Request r: Main.reg_requests)
+			
+			{
+				
+				if (r.getId().getRequestDetails() == filters.get(0)  || r.getId().getStatus() == filters.get(1))
+					
+					{
+						result.add(r);
+						
+						
+					}
+				
+				
+			}
+		
+		return result;
+		
+	}
+	 
+    public void update_status(Registration_Request res, String status)
+	
+	
+	{
+		for (Registration_Request r: Main.for (Registration_Request r: Main.reg_requests)
+			
+			{
+				
+				if (r.getId().getRequestDetails() == filters.get(0)  || r.getId().getStatus() == filters.get(1))
+					
+					{
+						r.setStatus(status);
+						
+						
+					}
+				
+				
+			}
+		
+		
+		
+	}
+	
+	public void check_type_of_user(ArrayList<String> details, String type)
+	
+	{
+		if (type.equals("Customer")
+			
+			{
+				
+				create_customer(details);
+				
+				
+			}
+			
+			
+		else
+			
+			{
+				
+				create_agent(details);
+				
+			}
+		
+		
+		
+	}
+	
+	
+	public void create_customer(ArraylList<String> details)
+	
+	{
+		
+		Customer c1 = new Customer(details);
+		
+		Main.customers.add(c1);
+		
+		
+	}
+	
+	public void create_agent(ArrayList<String> details)
+	
+	{
+	   TravelAgent t1 = new TravelAgent(details);
+	   
+	   Main.travel_agents.add(t1);
+		
+		
+		
+	}
+	
+	public void save_file_of_registration_request(Registrarion_Request r)
+	
+	
+	{
+		File f1 = new File(r1.get_path);
+		
+		f1.write("Last Update");
+		
+		f1.close();
+		
+	}
+	
 
 
 }

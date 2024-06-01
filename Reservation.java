@@ -18,6 +18,9 @@ class Reservation{
 	
 	private String status;
 	
+	private Srting path_files;
+	
+	
 	private ArrayList<Additional_supply> supplies;
 	
     public Reservation(int id, int packetId, int totalCost, int remain_cost, ArrayList<Customer> customers,
@@ -40,6 +43,17 @@ class Reservation{
 		return id + " " + packetId + " " + totalCost + " " + customers + " " + date + " " time + " " + usernameSubmitted;
 		
 	}
+	
+	public void set_path_files(String s)
+	
+	{
+		
+		path_files = s;
+		
+	}
+	
+	
+	
 
 
     public void setId(int id) {
